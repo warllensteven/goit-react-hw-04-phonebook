@@ -1,40 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 import Filter from './components/Filter';
-import { nanoid } from 'nanoid';
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
-  const [filter, setFilter] = useState('');
+    const [filter, setFilter] = useState('');
 
-  const addContact = ({ name, number }) => {
-    const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
+  useEffect(() => {
+    const savedContacts = JSON.parse(localStorage.getItem('contacts')) || [];
+    setContacts(savedContacts);
+  }, []);
 
-    if (contacts.some((contact) => contact.name.toLowerCase() === name.toLowerCase())) {
-      alert('Contact with this name already exists!');
-      return;
-    }
-
-    setContacts([...contacts, newContact]);
+  const addContact = (contact) => {
+    setContacts([...contacts, contact]);
   };
 
   const deleteContact = (id) => {
-    setContacts(contacts.filter((contact) => contact.id !== id));
+    const updatedContacts = contacts.filter((contact) => contact.id !== id);
+    setContacts(updatedContacts);
   };
 
+  
   const filteredContacts = contacts.filter((contact) =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
   return (
     <div>
-      <h1>Phonebook</h1>
-      <ContactForm addContact={addContact} />
+      <h1>Contact Book</h1>
+      <ContactForm onSubmit={addContact} />
       <h2>Contacts</h2>
       <Filter value={filter} onChange={setFilter} />
       <ContactList contacts={filteredContacts} onDeleteContact={deleteContact} />

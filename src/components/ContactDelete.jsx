@@ -1,9 +1,11 @@
 import React from 'react';
 
 const ContactDelete = ({ contact, onDeleteContact }) => {
+  const { id, name, number } = contact;
+
   return (
     <li>
-      {contact.name}: {contact.number} <button onClick={() => onDeleteContact(contact.id)}>Delete</button>
+      {name}: {number} <button onClick={() => onDeleteContact(id)}>Delete</button>
     </li>
   );
 };
