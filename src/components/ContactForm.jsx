@@ -14,21 +14,22 @@ const ContactForm = ({ onSubmit }) => {
 
   return (
     <div className="form-container">
-       <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>
-        Name:
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-      </label>
-      <label>
-        Number:
-        <input type="tel" value={number} onChange={(e) => setNumber(e.target.value)} required />
-      </label>
-      <button type="submit">Add Contact</button>
-      </div>
-    </form>
+            Name:
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+          </label>
+          <label>
+            Number:
+            <input type="tel" value={number} onChange={(e) => setNumber(e.target.value)} required />
+          </label>
+          <button type="submit">Add Contact</button>
+        </div>
+      </form>
     </div>
   );
 };
 
 export default ContactForm;
+
